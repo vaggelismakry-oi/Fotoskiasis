@@ -21,3 +21,12 @@ html{scroll-behavior:smooth}
 .faq__a{padding:0 2.4rem 1.5rem 0;color:var(--muted);line-height:1.75}
 /* Mobile: shift home hero focal point so the Acropolis stays in frame when the wide photo is cropped to portrait */
 @media (max-width:768px){.hero__bg img{object-position:28% 50%}}
+/* Phones: show products two-at-a-time as a compact, scannable catalogue grid.
+   Placed last so it wins over the base .prod__price / .prod__view rules. */
+@media (max-width:420px){
+  .prod-grid,.prod-grid--3{grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem .8rem}
+  .prod{display:flex;flex-direction:column}
+  .prod>p:not([class]){display:none}
+  .prod__view{display:none}
+  .prod .prod__price{margin-top:auto;padding-top:.55rem}
+}
