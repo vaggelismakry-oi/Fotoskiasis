@@ -19,3 +19,5 @@ html{scroll-behavior:smooth}
 .faq details[open] summary:after{transform:rotate(45deg)}
 .faq summary:hover{color:var(--brass)}
 .faq__a{padding:0 2.4rem 1.5rem 0;color:var(--muted);line-height:1.75}
+/* Mobile: shift home hero focal point so the Acropolis stays in frame when the wide photo is cropped to portrait */
+@media (max-width:768px){.hero__bg img{object-position:28% 50%}}
