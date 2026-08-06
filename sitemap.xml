@@ -1061,4 +1061,20 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://fotoskiasis.com/hospitality-lighting-design.html"/>
     <changefreq>monthly</changefreq><priority>0.9</priority>
   </url>
+  <url>
+    <loc>https://fotoskiasis.com/rechargeable-lamps-guide.html</loc>
+    <lastmod>2026-07-18</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://fotoskiasis.com/rechargeable-lamps-guide.html"/>
+    <xhtml:link rel="alternate" hreflang="el" href="https://fotoskiasis.com/el/rechargeable-lamps-guide.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://fotoskiasis.com/rechargeable-lamps-guide.html"/>
+    <changefreq>monthly</changefreq><priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://fotoskiasis.com/el/rechargeable-lamps-guide.html</loc>
+    <lastmod>2026-07-18</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://fotoskiasis.com/rechargeable-lamps-guide.html"/>
+    <xhtml:link rel="alternate" hreflang="el" href="https://fotoskiasis.com/el/rechargeable-lamps-guide.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://fotoskiasis.com/rechargeable-lamps-guide.html"/>
+    <changefreq>monthly</changefreq><priority>0.8</priority>
+  </url>
 </urlset>
