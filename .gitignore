@@ -1,0 +1,13 @@
+# Local tooling — not part of the deployed site
+node_modules/
+.wrangler/
+.claude/
+package-lock.json
+
+# OS / editor noise
+.DS_Store
+Thumbs.db
+*.log
+.vscode/
+.idea/
+*.zip

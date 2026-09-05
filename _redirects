@@ -1,0 +1,4 @@
+# Cloudflare Pages — redirects
+# Canonicalise www -> apex (301). Requires www.fotoskiasis.com to be attached
+# to this Pages project as a custom domain.
+https://www.fotoskiasis.com/*  https://fotoskiasis.com/:splat  301
