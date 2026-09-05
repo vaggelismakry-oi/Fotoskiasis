@@ -30,3 +30,7 @@ html{scroll-behavior:smooth}
   .prod__view{display:none}
   .prod .prod__price{margin-top:auto;padding-top:.55rem}
 }
+
+.skip-link{position:absolute;left:-9999px;top:0;z-index:2000;background:var(--ink);color:var(--paper);padding:.85rem 1.4rem;font-family:var(--sans);font-size:.9rem;font-weight:600;text-decoration:none;border-radius:0 0 4px 0}
+.skip-link:focus{left:0}
+main:focus{outline:none}

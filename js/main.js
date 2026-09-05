@@ -74,6 +74,8 @@
             if (note) { note.textContent = MSG.ok; note.style.display = 'block'; note.style.color = ''; }
             form.reset();
             if (btn) btn.textContent = MSG.sent;
+            /* record the lead for GA4 / Google Ads (no-op until IDs are set) */
+            if (typeof window.fsTrackLead === 'function') window.fsTrackLead();
           } else if (res && res.message) {
             if (note) { note.textContent = res.message; note.style.display = 'block'; note.style.color = '#b4452f'; }
             if (btn) { btn.textContent = btn.dataset.label || 'Send'; btn.disabled = false; }
