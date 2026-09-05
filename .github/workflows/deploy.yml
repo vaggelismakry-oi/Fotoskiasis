@@ -1,0 +1,60 @@
+name: Deploy to Cloudflare Pages
+
+# Every push to main deploys the site. This replaces the manual
+# `wrangler pages deploy` step, and does it without granting the
+# Cloudflare GitHub App access to the account.
+#
+# One-time setup — add these under
+#   Settings -> Secrets and variables -> Actions -> New repository secret
+#
+#   CLOUDFLARE_API_TOKEN   a token with the "Cloudflare Pages: Edit" permission
+#   CLOUDFLARE_ACCOUNT_ID  aec462c5a8b5f2573ea0fbce364be2a0
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  audit:
+    name: Pre-deploy audit
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      # Blocks the deploy on unreplaced placeholders, missing canonicals or
+      # hreflang, broken internal links, images without alt text, and pages
+      # that lost their single h1.
+      - name: Run site audit
+        run: node .tools/audit.mjs
+
+      - name: Check landmark structure
+        run: node .tools/check-structure.mjs
+
+      - name: Check language switcher targets
+        run: node .tools/check-langswitch.mjs
+
+  deploy:
+    name: Deploy
+    needs: audit
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      deployments: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Publish to Cloudflare Pages
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: >-
+            pages deploy .
+            --project-name=fotoskiasis-preview
+            --branch=main
+            --commit-dirty=true
