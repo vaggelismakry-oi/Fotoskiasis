@@ -1,4 +1,13 @@
-# Cloudflare Pages — redirects
-# Canonicalise www -> apex (301). Requires www.fotoskiasis.com to be attached
-# to this Pages project as a custom domain.
-https://www.fotoskiasis.com/*  https://fotoskiasis.com/:splat  301
+# Cloudflare Pages — redirects (relative paths only).
+#
+# www -> apex is NOT handled here: Pages rejects absolute source URLs, so an
+# earlier `https://www.fotoskiasis.com/*` line was silently ignored. It belongs
+# in a zone-level Redirect Rule instead:
+#
+#   Cloudflare -> fotoskiasis.com -> Rules -> Redirect Rules -> Create
+#     If hostname equals   www.fotoskiasis.com
+#     Then dynamic URL     concat("https://fotoskiasis.com", http.request.uri.path)
+#     Status 301, preserve query string
+#
+# Until then both hostnames serve the site, and every page's canonical tag
+# points at the apex, so search engines consolidate on fotoskiasis.com.

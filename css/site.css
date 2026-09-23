@@ -34,3 +34,90 @@ html{scroll-behavior:smooth}
 .skip-link{position:absolute;left:-9999px;top:0;z-index:2000;background:var(--ink);color:var(--paper);padding:.85rem 1.4rem;font-family:var(--sans);font-size:.9rem;font-weight:600;text-decoration:none;border-radius:0 0 4px 0}
 .skip-link:focus{left:0}
 main:focus{outline:none}
+
+/* =====================================================================
+   Visual corrections — September 2026
+   Contrast and hierarchy fixes. The brand palette is unchanged: brass is
+   only deepened where it carries small text on a light ground or sits
+   behind a white button label. On dark grounds it already passes (5.98:1)
+   and stays exactly as it was.
+   ===================================================================== */
+:root{
+  --brass-ink:#875f24;  /* brass for small text on cream/paper — 4.96:1 */
+  --brass-btn:#936527;  /* button fill — --paper label reads at 4.83:1 */
+}
+
+/* Header: pages without a dark hero must not start with a transparent bar.
+   :has() removes the flash before main.js runs; main.js covers the rest. */
+body:not(:has(.hero,.pagehero)) .header{background:var(--ink);box-shadow:0 1px 0 var(--line-dk)}
+
+/* Primary button — white label was 3.13:1 on the old fill */
+.btn--primary{background:var(--brass-btn)}
+.btn--primary:hover{background:var(--ink)}
+/* the sticky mobile bar and the mobile-menu CTA are separate classes */
+.s-quote{background:var(--brass-btn)}
+.s-quote:hover{background:var(--ink)}
+.btn--primary.m-cta{color:var(--paper)}
+
+/* Small brass text on light grounds — was 2.73:1 */
+.eyebrow,.prod__brand,.svc__num,.works__cat,.pdp-colours__label{color:var(--brass-ink)}
+.eyebrow:before{background:var(--brass-ink)}
+.dark .eyebrow,.dark .prod__brand,.dark .svc__num,.dark .works__cat,
+.hero .eyebrow,.pagehero .eyebrow,.cta-band .eyebrow{color:var(--brass)}
+.dark .eyebrow:before,.hero .eyebrow:before,.pagehero .eyebrow:before,.cta-band .eyebrow:before{background:var(--brass)}
+
+/* .prose forced dark text even inside dark sections — was 1.27:1 */
+.dark .prose p,.dark .prose li{color:var(--on-dark)}
+.dark .prose a{color:var(--brass-lt)}
+.dark .prose a:hover{color:var(--paper)}
+
+/* Project cards always sit on ink, but their text inherited dark — was 1.27:1 */
+.proj h3{color:var(--paper)}
+.proj:hover h3{color:var(--brass-lt)}
+.proj p{color:var(--on-dark)}
+.proj__meta{color:var(--brass-lt)}
+
+/* Navigation wrapped onto two lines at laptop widths */
+.nav__links a{white-space:nowrap}
+@media (max-width:1240px){.nav__links{gap:1.25rem}}
+
+/* ---------------------------------------------------------------------
+   Project pages open on the photograph.
+   The image runs at full strength; the gradient is heavy only at the top
+   (so the header stays legible over bright ceilings) and at the base
+   (where the title and lead sit). The middle is left almost clear.
+   --------------------------------------------------------------------- */
+.pagehero--project{min-height:min(90vh,900px);display:flex;align-items:flex-end;padding:9rem 0 3.8rem}
+.pagehero--project .pagehero__bg{opacity:1}
+.pagehero--project .pagehero__bg:after{background:linear-gradient(180deg,rgba(21,18,13,.64) 0%,rgba(21,18,13,.12) 20%,rgba(21,18,13,.16) 36%,rgba(21,18,13,.62) 54%,rgba(21,18,13,.86) 72%,rgba(21,18,13,.95) 100%)}
+.pagehero--project .crumbs,.pagehero--project .pdetail__meta,.pagehero--project .lead{text-shadow:0 1px 14px rgba(10,8,5,.55)}
+.pagehero--project .crumbs{color:#e9e2d2}
+.pagehero--project .crumbs a{color:#f5f0e6}
+.pagehero--project .pagehero__inner{max-width:880px}
+.pagehero--project h1{font-size:clamp(2.7rem,6.2vw,4.8rem);line-height:1.02;margin:.9rem 0 1.1rem;text-wrap:balance}
+.pagehero--project .pdetail__meta{color:var(--brass-lt);letter-spacing:.16em}
+.pagehero--project .lead{max-width:60ch;color:#f5f0e6e6}
+@media (max-width:700px){
+  .pagehero--project{min-height:82vh;padding:7.5rem 0 2.6rem}
+  .pagehero--project h1{font-size:clamp(2.3rem,10vw,3rem)}
+}
+
+/* Stragglers found by re-scanning after the first pass */
+.pdp-colours__label em,.doclink em{color:var(--brass-ink)}
+.swatch--photo.active{background:var(--brass-btn);border-color:var(--brass-btn)}
+/* our-projects.html re-declares .works__cat in its own <style>, which loads
+   after this file at equal specificity — so this needs one more selector */
+main .works__cat{color:var(--brass-ink)}
+/* the struck-through old price is a small ink pill inside a light card */
+.prod .prod__sale{color:var(--on-dark-mut)}
+
+/* Bright brass text passes on every dark ground (5.98:1) and fails on every
+   light one (2.73:1). Rather than patch each class as it is found: deepen it
+   on light grounds, then hand the original back to every dark context. */
+.serif-accent,.link-arrow,.case-meta dt,.ind__n,.quote__mark,.contact-line .ci,
+.post__cat,.divider-num strong,.prod__view,.faq summary:hover,.clients span:hover{color:var(--brass-ink)}
+.faq summary:after{color:var(--brass-ink)}
+:is(.dark,.hero,.pagehero,.cta-band,.footer,footer,.proj) :is(.serif-accent,.link-arrow,.case-meta dt,.ind__n,.quote__mark,.contact-line .ci,.post__cat,.divider-num strong,.prod__view,.clients span:hover){color:var(--brass)}
+:is(.dark,.footer,footer) .faq summary:after{color:var(--brass)}
+/* hover on service cards brightens the arrow — keep that affordance */
+.svc:hover .link-arrow{color:var(--brass-lt)}

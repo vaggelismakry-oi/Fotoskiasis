@@ -7,7 +7,9 @@
   var hero = document.querySelector('.hero, .pagehero');
   function onScroll() {
     if (!header) return;
-    var threshold = hero ? Math.min(hero.offsetHeight - 90, 90) : 40;
+    // Without a dark hero behind it the transparent header is unreadable
+    // (near-white on cream), so those pages start with it solid.
+    var threshold = hero ? Math.min(hero.offsetHeight - 90, 90) : -1;
     header.classList.toggle('scrolled', window.scrollY > threshold);
   }
   window.addEventListener('scroll', onScroll, { passive: true });
