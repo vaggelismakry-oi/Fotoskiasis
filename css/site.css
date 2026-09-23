@@ -55,8 +55,8 @@ body:not(:has(.hero,.pagehero)) .header{background:var(--ink);box-shadow:0 1px 0
 .btn--primary{background:var(--brass-btn)}
 .btn--primary:hover{background:var(--ink)}
 /* the sticky mobile bar and the mobile-menu CTA are separate classes */
-.s-quote{background:var(--brass-btn)}
-.s-quote:hover{background:var(--ink)}
+.s-quote,.sticky-cta .s-quote{background:var(--brass-btn)}
+.s-quote:hover,.sticky-cta .s-quote:hover{background:var(--ink)}
 .btn--primary.m-cta{color:var(--paper)}
 
 /* Small brass text on light grounds — was 2.73:1 */
@@ -121,3 +121,45 @@ main .works__cat{color:var(--brass-ink)}
 :is(.dark,.footer,footer) .faq summary:after{color:var(--brass)}
 /* hover on service cards brightens the arrow — keep that affordance */
 .svc:hover .link-arrow{color:var(--brass-lt)}
+
+/* =====================================================================
+   Case studies — magazine layout
+   Text runs in a narrow reading column; photographs break out of it as
+   wide plates, pairs, and portraits set beside the text they illustrate.
+   ===================================================================== */
+.story{background:var(--paper);padding:clamp(4.5rem,9vw,8rem) 0 clamp(3.5rem,7vw,6rem)}
+.story__col{max-width:41rem;margin:0 auto;padding:0 clamp(1.3rem,5vw,3.5rem)}
+.story__col + .story__col{margin-top:clamp(2.6rem,5vw,3.6rem)}
+.story__col h2{font-size:clamp(1.85rem,3.4vw,2.6rem);line-height:1.1;margin:0 0 1.15rem;text-wrap:balance}
+.story__col p{font-size:1.09rem;line-height:1.8;color:var(--text);margin:0}
+.story__lede::first-letter{font-family:var(--serif);float:left;font-size:4.7em;line-height:.8;margin:.06em .12em 0 0;color:var(--brass-ink)}
+
+.story__fig,.story__side,.story__quote{max-width:calc(1180px + 2 * clamp(1.3rem,5vw,3.5rem));margin:clamp(3.2rem,7vw,5.6rem) auto;padding:0 clamp(1.3rem,5vw,3.5rem)}
+.story__fig img,.story__side-fig img{display:block;width:100%;height:auto}
+.story__pair{display:grid;grid-template-columns:1fr 1fr;gap:clamp(.7rem,1.8vw,1.3rem)}
+.story__pair img{object-fit:cover}
+.story figcaption{max-width:41rem;margin:.95rem 0 0;font-size:.88rem;line-height:1.6;color:var(--muted)}
+.story figcaption b{font-weight:600;color:var(--ink)}
+
+.story__side{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);gap:clamp(2rem,5vw,4.5rem);align-items:center}
+.story__side--flip{grid-template-columns:minmax(0,6fr) minmax(0,5fr)}
+.story__side--flip .story__side-fig{order:2}
+.story__side .story__col{margin:0;padding:0;max-width:none}
+.story__side-fig{margin:0}
+
+.story__quote{text-align:center;border:0}
+.story__quote p{max-width:46rem;margin:0 auto;font-family:var(--serif);font-style:italic;font-weight:400;font-size:clamp(1.75rem,3.8vw,2.85rem);line-height:1.2;color:var(--ink);text-wrap:balance}
+.story__quote:before{content:"";display:block;width:44px;height:1px;background:var(--brass-ink);margin:0 auto 1.9rem}
+
+.story__back{max-width:41rem;margin:clamp(3rem,6vw,4.5rem) auto 0;padding:0 clamp(1.3rem,5vw,3.5rem);font-size:.92rem}
+.story__back a{color:var(--brass-ink);text-decoration:none;border-bottom:1px solid currentColor;padding-bottom:1px}
+.story__back a:hover{color:var(--ink)}
+
+@media (max-width:820px){
+  .story__side,.story__side--flip{grid-template-columns:1fr}
+  .story__side--flip .story__side-fig{order:0}
+}
+@media (max-width:640px){
+  .story__pair{grid-template-columns:1fr}
+  .story__lede::first-letter{font-size:3.9em}
+}
