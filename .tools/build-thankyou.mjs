@@ -10,8 +10,8 @@ const COPY = {
   en: {
     source: 'privacy.html',
     out: 'thank-you.html',
-    title: 'Thank you | fotoskiasis',
-    description: 'Your consultation request has reached the fotoskiasis studio. We reply within one business day.',
+    title: 'Thank you | Fotoskiasis',
+    description: 'Your consultation request has reached the Fotoskiasis studio. We reply within one business day.',
     canonical: 'https://fotoskiasis.com/thank-you',
     crumbHome: 'Home',
     crumb: 'Thank you',
@@ -26,8 +26,8 @@ const COPY = {
   el: {
     source: 'el/privacy.html',
     out: 'el/thank-you.html',
-    title: 'Ευχαριστούμε | fotoskiasis',
-    description: 'Το αίτημά σας έφτασε στο studio της fotoskiasis. Απαντάμε εντός μίας εργάσιμης ημέρας.',
+    title: 'Ευχαριστούμε | Fotoskiasis',
+    description: 'Το αίτημά σας έφτασε στο studio της Fotoskiasis. Απαντάμε εντός μίας εργάσιμης ημέρας.',
     canonical: 'https://fotoskiasis.com/el/thank-you',
     crumbHome: 'Αρχική',
     crumb: 'Ευχαριστούμε',

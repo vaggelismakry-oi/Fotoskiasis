@@ -69,7 +69,7 @@ for (const file of htmlPages('.')) {
   if (!s.includes('property="og:image"')) continue;
   const lang = /<html lang="el"/.test(s) ? 'el' : 'en';
   const main = s.slice(s.indexOf('<main'), s.indexOf('</main>'));
-  const title = decode((s.match(/property="og:title" content="([^"]*)"/) || [])[1] || '').replace(/\s*\|\s*fotoskiasis$/, '');
+  const title = decode((s.match(/property="og:title" content="([^"]*)"/) || [])[1] || '').replace(/\s*\|\s*fotoskiasis$/i, '');
 
   let url, alt;
   const stage = main.match(/<img\b[^>]*data-stage-img[^>]*>/);
@@ -87,8 +87,8 @@ for (const file of htmlPages('.')) {
   } else {
     url = DEFAULT.src;
     alt = lang === 'el'
-      ? 'Το Dionysos Zonars με την φωταγωγημένη Ακρόπολη πίσω από το τζάμι — φωτισμός από τη fotoskiasis'
-      : 'Dionysos Zonars with the floodlit Acropolis beyond the glazing — lighting by fotoskiasis';
+      ? 'Το Dionysos Zonars με την φωταγωγημένη Ακρόπολη πίσω από το τζάμι — φωτισμός από τη Fotoskiasis'
+      : 'Dionysos Zonars with the floodlit Acropolis beyond the glazing — lighting by Fotoskiasis';
   }
 
   const abs = ORIGIN + url;
