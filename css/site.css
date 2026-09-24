@@ -163,3 +163,9 @@ main .works__cat{color:var(--brass-ink)}
   .story__pair{grid-template-columns:1fr}
   .story__lede::first-letter{font-size:3.9em}
 }
+
+/* A scrim behind the transparent header on project heroes. Night photographs
+   are dark at the top anyway, but a bright one (Taj Mahal's white timber
+   ceiling) left the brass logo tagline at 1.36:1. Fades out by the header's
+   bottom edge, so it reads as shade rather than a bar. */
+body:has(.pagehero--project) .header:not(.scrolled){background:linear-gradient(180deg,rgba(21,18,13,.9) 0%,rgba(21,18,13,.86) 82%,rgba(21,18,13,0) 100%)}

@@ -335,13 +335,13 @@ export const projects = {
   },
 
   /* =================================================================== */
-  'tij-mahal': {
+  'taj-mahal': {
     sections: {
       space: s(
         'The space',
-        'Tij Mahal occupies a bright, white-painted room under an exposed timber truss roof, with a carved ogee arch set into one wall and patterned tabletops throughout. Unlike the darker fine-dining rooms, this one had to stay genuinely light — an Indian dining room reads as welcoming when it is bright — while still giving the eye somewhere to go.',
+        'Taj Mahal occupies a bright, white-painted room under an exposed timber truss roof, with a carved ogee arch set into one wall and patterned tabletops throughout. Unlike the darker fine-dining rooms, this one had to stay genuinely light — an Indian dining room reads as welcoming when it is bright — while still giving the eye somewhere to go.',
         'Ο χώρος',
-        'Το Tij Mahal καταλαμβάνει έναν φωτεινό, λευκοβαμμένο χώρο κάτω από εμφανές ξύλινο ζευκτό, με σκαλιστό οξυκόρυφο τόξο σε έναν τοίχο και εμπριμέ επιφάνειες τραπεζιών. Σε αντίθεση με τις πιο σκοτεινές αίθουσες fine dining, εδώ ο χώρος έπρεπε να παραμείνει πραγματικά φωτεινός — μια ινδική τραπεζαρία διαβάζεται φιλόξενη όταν είναι φωτεινή — δίνοντας ταυτόχρονα στο μάτι κάπου να πάει.'),
+        'Το Taj Mahal καταλαμβάνει έναν φωτεινό, λευκοβαμμένο χώρο κάτω από εμφανές ξύλινο ζευκτό, με σκαλιστό οξυκόρυφο τόξο σε έναν τοίχο και εμπριμέ επιφάνειες τραπεζιών. Σε αντίθεση με τις πιο σκοτεινές αίθουσες fine dining, εδώ ο χώρος έπρεπε να παραμείνει πραγματικά φωτεινός — μια ινδική τραπεζαρία διαβάζεται φιλόξενη όταν είναι φωτεινή — δίνοντας ταυτόχρονα στο μάτι κάπου να πάει.'),
       approach: s(
         'How it is lit',
         'The general light is entirely indirect. Linear LED runs are concealed along the ridge and the wall heads, throwing light up into the white-painted timber so the roof structure itself becomes the luminaire. Because the source is hidden and the bounce surface is large, the room fills evenly with no glare and no hard shadows — which matters when the tables carry heavily patterned cloth that direct downlighting would render as visual noise.',
@@ -363,22 +363,22 @@ export const projects = {
       'Η ίδια η στέγη γίνεται το φωτιστικό.'),
     alts: {
       en: [
-        'Tij Mahal dining room — indirect light along the white timber roof, a backlit carved arch and mosaic-glass pendants',
-        'Tij Mahal façade at night — the entrance arch outlined in warm light beneath the illuminated restaurant sign',
-        'Tij Mahal entrance — the arched doorway outlined in warm light under a starry sky',
-        'Tij Mahal feature wall — a backlit artwork in an arched frame beneath trailing greenery lit by a concealed strip',
-        'Tij Mahal — the backlit arched artwork and lit greenery above a blue banquette and set tables',
-        'Tij Mahal dining room — indirect cove light on the timber truss, mosaic-glass pendants and arched window screens',
-        'Tij Mahal dining room — the white truss roof lit indirectly over patterned tables and arched screens',
+        'Taj Mahal dining room — indirect light along the white timber roof, a backlit carved arch and mosaic-glass pendants',
+        'Taj Mahal façade at night — the entrance arch outlined in warm light beneath the illuminated restaurant sign',
+        'Taj Mahal entrance — the arched doorway outlined in warm light under a starry sky',
+        'Taj Mahal feature wall — a backlit artwork in an arched frame beneath trailing greenery lit by a concealed strip',
+        'Taj Mahal — the backlit arched artwork and lit greenery above a blue banquette and set tables',
+        'Taj Mahal dining room — indirect cove light on the timber truss, mosaic-glass pendants and arched window screens',
+        'Taj Mahal dining room — the white truss roof lit indirectly over patterned tables and arched screens',
       ],
       el: [
-        'Η αίθουσα του Tij Mahal — έμμεσο φως στη λευκή ξύλινη στέγη, φωτισμένο σκαλιστό τόξο και κρεμαστά από ψηφιδωτό γυαλί',
-        'Η όψη του Tij Mahal τη νύχτα — το τόξο της εισόδου περιγραμμένο με θερμό φως κάτω από τη φωτεινή επιγραφή',
-        'Η είσοδος του Tij Mahal — η τοξωτή πόρτα περιγραμμένη με θερμό φως κάτω από έναστρο ουρανό',
-        'Ο τοίχος-σημείο του Tij Mahal — έργο τέχνης με οπίσθιο φωτισμό σε τοξωτή κορνίζα, κάτω από κρεμαστή πρασινάδα φωτισμένη με κρυφή ταινία',
-        'Tij Mahal — το φωτισμένο τοξωτό έργο και η πρασινάδα πάνω από μπλε καναπέ και στρωμένα τραπέζια',
-        'Η αίθουσα του Tij Mahal — έμμεσο φως στο ξύλινο ζευκτό, κρεμαστά από ψηφιδωτό γυαλί και τοξωτά πετάσματα παραθύρων',
-        'Η αίθουσα του Tij Mahal — η λευκή στέγη φωτισμένη έμμεσα πάνω από εμπριμέ τραπέζια και τοξωτά πετάσματα',
+        'Η αίθουσα του Taj Mahal — έμμεσο φως στη λευκή ξύλινη στέγη, φωτισμένο σκαλιστό τόξο και κρεμαστά από ψηφιδωτό γυαλί',
+        'Η όψη του Taj Mahal τη νύχτα — το τόξο της εισόδου περιγραμμένο με θερμό φως κάτω από τη φωτεινή επιγραφή',
+        'Η είσοδος του Taj Mahal — η τοξωτή πόρτα περιγραμμένη με θερμό φως κάτω από έναστρο ουρανό',
+        'Ο τοίχος-σημείο του Taj Mahal — έργο τέχνης με οπίσθιο φωτισμό σε τοξωτή κορνίζα, κάτω από κρεμαστή πρασινάδα φωτισμένη με κρυφή ταινία',
+        'Taj Mahal — το φωτισμένο τοξωτό έργο και η πρασινάδα πάνω από μπλε καναπέ και στρωμένα τραπέζια',
+        'Η αίθουσα του Taj Mahal — έμμεσο φως στο ξύλινο ζευκτό, κρεμαστά από ψηφιδωτό γυαλί και τοξωτά πετάσματα παραθύρων',
+        'Η αίθουσα του Taj Mahal — η λευκή στέγη φωτισμένη έμμεσα πάνω από εμπριμέ τραπέζια και τοξωτά πετάσματα',
       ],
     },
     flow: [

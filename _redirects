@@ -11,3 +11,31 @@
 #
 # Until then both hostnames serve the site, and every page's canonical tag
 # points at the apex, so search engines consolidate on fotoskiasis.com.
+
+# The restaurant is "Taj Mahal" (as its own sign reads); it was misspelled
+# "Tij Mahal" across the site until September 2026. These keep every old
+# address working — search results, bookmarks and inbound links included.
+/projects/tij-mahal                                        /projects/taj-mahal                                    301
+/projects/tij-mahal.html                                   /projects/taj-mahal                                    301
+/el/projects/tij-mahal                                     /el/projects/taj-mahal                                 301
+/el/projects/tij-mahal.html                                /el/projects/taj-mahal                                 301
+/images/project-tij-mahal-2-480w.webp                      /images/project-taj-mahal-2-480w.webp                  301
+/images/project-tij-mahal-2-960w.webp                      /images/project-taj-mahal-2-960w.webp                  301
+/images/project-tij-mahal-2.webp                           /images/project-taj-mahal-2.webp                       301
+/images/project-tij-mahal-3-480w.webp                      /images/project-taj-mahal-3-480w.webp                  301
+/images/project-tij-mahal-3.webp                           /images/project-taj-mahal-3.webp                       301
+/images/project-tij-mahal-4-480w.webp                      /images/project-taj-mahal-4-480w.webp                  301
+/images/project-tij-mahal-4-960w.webp                      /images/project-taj-mahal-4-960w.webp                  301
+/images/project-tij-mahal-4.webp                           /images/project-taj-mahal-4.webp                       301
+/images/project-tij-mahal-5-480w.webp                      /images/project-taj-mahal-5-480w.webp                  301
+/images/project-tij-mahal-5-960w.webp                      /images/project-taj-mahal-5-960w.webp                  301
+/images/project-tij-mahal-5.webp                           /images/project-taj-mahal-5.webp                       301
+/images/project-tij-mahal-6-480w.webp                      /images/project-taj-mahal-6-480w.webp                  301
+/images/project-tij-mahal-6-960w.webp                      /images/project-taj-mahal-6-960w.webp                  301
+/images/project-tij-mahal-6.webp                           /images/project-taj-mahal-6.webp                       301
+/images/project-tij-mahal-7-480w.webp                      /images/project-taj-mahal-7-480w.webp                  301
+/images/project-tij-mahal-7-960w.webp                      /images/project-taj-mahal-7-960w.webp                  301
+/images/project-tij-mahal-7.webp                           /images/project-taj-mahal-7.webp                       301
+/images/tij-mahal-restaurant-lighting-athens-480w.webp     /images/taj-mahal-restaurant-lighting-athens-480w.webp 301
+/images/tij-mahal-restaurant-lighting-athens-960w.webp     /images/taj-mahal-restaurant-lighting-athens-960w.webp 301
+/images/tij-mahal-restaurant-lighting-athens.webp          /images/taj-mahal-restaurant-lighting-athens.webp      301
