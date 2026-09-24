@@ -207,13 +207,18 @@ body:has(.pagehero--project) .header:not(.scrolled){background:linear-gradient(1
 
 /* Hero content is on screen at load, so it enters with CSS alone instead of
    waiting for main.js to reveal it. The homepage subtitle is the page's
-   largest paint and was appearing ~1.1s after the rest of the page. */
-@keyframes rise{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
-:is(.hero,.pagehero) .reveal{opacity:1;transform:none;transition:none;animation:rise .9s var(--ease) both}
-:is(.hero,.pagehero) .reveal[data-d="1"]{animation-delay:.1s}
-:is(.hero,.pagehero) .reveal[data-d="2"]{animation-delay:.2s}
-:is(.hero,.pagehero) .reveal[data-d="3"]{animation-delay:.3s}
-:is(.hero,.pagehero) .reveal[data-d="4"]{animation-delay:.4s}
+   largest paint and was appearing ~1.1s after the rest of the page.
+   Every line starts fading in at first paint and only the rise is staggered:
+   Chrome counts a paint for LCP only if the element is visible when first
+   painted, so a staggered fade (opacity 0 during its delay) left the title
+   and subtitle uncounted, and the cookie banner became the page's LCP. */
+@keyframes hero-fade{from{opacity:0}}
+@keyframes hero-rise{from{transform:translateY(22px)}}
+:is(.hero,.pagehero) .reveal{opacity:1;transform:none;transition:none;animation:hero-fade .9s var(--ease) both,hero-rise .9s var(--ease) both}
+:is(.hero,.pagehero) .reveal[data-d="1"]{animation-delay:0s,.1s}
+:is(.hero,.pagehero) .reveal[data-d="2"]{animation-delay:0s,.2s}
+:is(.hero,.pagehero) .reveal[data-d="3"]{animation-delay:0s,.3s}
+:is(.hero,.pagehero) .reveal[data-d="4"]{animation-delay:0s,.4s}
 @media (prefers-reduced-motion:reduce){:is(.hero,.pagehero) .reveal{animation:none}}
 
 /* The Greek fonts join the stacks on Greek pages only. Chrome fetches a
