@@ -39,3 +39,8 @@
 /images/tij-mahal-restaurant-lighting-athens-480w.webp     /images/taj-mahal-restaurant-lighting-athens-480w.webp 301
 /images/tij-mahal-restaurant-lighting-athens-960w.webp     /images/taj-mahal-restaurant-lighting-athens-960w.webp 301
 /images/tij-mahal-restaurant-lighting-athens.webp          /images/taj-mahal-restaurant-lighting-athens.webp      301
+
+# el.html was a stale second copy of the Greek homepage, served at /el
+# while the maintained one lives at /el/. Removed; send /el to /el/.
+/el                                                        /el/                                                   301
+/el.html                                                   /el/                                                   301

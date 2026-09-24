@@ -16,6 +16,30 @@ import { dimensions } from './image-dimensions.mjs';
 const CHECK = process.argv.includes('--check');
 const ORIGIN = 'https://fotoskiasis.com';
 const BACK = { en: ['/our-projects', '← All projects'], el: ['/el/our-projects', '← Όλα τα έργα'] };
+const MORE = { en: 'More work', el: 'Περισσότερα έργα' };
+
+/* Three related projects at the end of each case study, chosen by kind of
+   venue. Each project page previously received only 1-3 internal links. */
+const RELATED = {
+  'baraonda':        ['dionysos-zonars', 'daphnes', 'taj-mahal'],
+  'dionysos-zonars': ['baraonda', 'daphnes', 'notos'],
+  'mojito-bay':      ['notos', 'naxos-villa', 'baraonda'],
+  'daphnes':         ['dionysos-zonars', 'baraonda', 'taj-mahal'],
+  'notos':           ['mojito-bay', 'naxos-villa', 'dionysos-zonars'],
+  'taj-mahal':       ['daphnes', 'baraonda', 'dionysos-zonars'],
+  'naxos-villa':     ['notos', 'mojito-bay', 'daphnes'],
+};
+
+/** Title, meta line and hero photo of another project, in the same language. */
+function projectCard(slug, lang) {
+  const file = (lang === 'el' ? 'el/' : '') + 'projects/' + slug + '.html';
+  const html = fs.readFileSync(file, 'utf8');
+  const title = (html.match(/<h1>([^<]*)<\/h1>/) || [])[1] || slug;
+  const meta = ((html.match(/<p class="pdetail__meta">([\s\S]*?)<\/p>/) || [])[1] || '').replace(/<span>·<\/span>/g, ' · ').replace(/<[^>]+>/g, '').trim();
+  const hero = (html.match(/<div class="pagehero__bg"[^>]*>\s*<img\b[^>]*\ssrc="([^"]+)"/) || [])[1];
+  const href = (lang === 'el' ? '/el' : '') + '/projects/' + slug;
+  return { title, meta, hero, href };
+}
 
 const SIZES = {
   wide: '(max-width: 1240px) 100vw, 1180px',
@@ -60,7 +84,19 @@ function textBlock(sec, lede) {
   return '<h2>' + escText(sec.h) + '</h2>\n      <p' + (lede ? ' class="story__lede"' : '') + '>' + sec.p + '</p>';
 }
 
-function buildStory(p, lang, images) {
+function moreWork(slug, lang) {
+  const cards = (RELATED[slug] || []).map((s) => projectCard(s, lang)).filter((c) => c.hero);
+  if (!cards.length) return '';
+  const li = cards.map((c) =>
+    '<li><a class="story__more-card" href="' + c.href + '">' +
+    img(c.hero, '', '(max-width: 640px) 100vw, (max-width: 1240px) 33vw, 380px', 'aspect-ratio:3/2') +
+    '<span class="story__more-title">' + escText(c.title) + '</span>' +
+    (c.meta ? '<span class="story__more-meta">' + escText(c.meta) + '</span>' : '') +
+    '</a></li>').join('');
+  return '    <nav class="story__more" aria-label="' + MORE[lang] + '"><h2>' + MORE[lang] + '</h2><ul>' + li + '</ul></nav>';
+}
+
+function buildStory(p, lang, images, slug) {
   const photo = (n) => {
     const src = images[n - 1];
     if (!src) throw new Error('no photo ' + n);
@@ -95,6 +131,8 @@ function buildStory(p, lang, images) {
     }
   }
 
+  const more = moreWork(slug, lang);
+  if (more) out.push(more);
   const [href, label] = BACK[lang];
   out.push('    <p class="story__back"><a href="' + href + '">' + label + '</a></p>');
   return '<article class="story" data-case-study>\n' + out.join('\n') + '\n  </article>';
@@ -135,7 +173,7 @@ for (const [slug, p] of Object.entries(projects)) {
       if (start === -1 || pgal === -1 || end < start) { problems.push(file + ': could not find the old story + gallery'); continue; }
     }
 
-    const story = buildStory(p, lang, images);
+    const story = buildStory(p, lang, images, slug);
     const next = html.slice(0, start) + story + html.slice(end);
     if (!CHECK) fs.writeFileSync(file, next);
     built++;

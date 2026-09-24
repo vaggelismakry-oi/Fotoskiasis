@@ -20,9 +20,9 @@
 
   var T = isEl
     ? { t: 'Χρησιμοποιούμε απαραίτητα cookies και — με τη συγκατάθεσή σας — Google Analytics για να βελτιώνουμε τον ιστότοπο.',
-        a: 'Αποδοχή', d: 'Απόρριψη', m: 'Περισσότερα' }
+        a: 'Αποδοχή', d: 'Απόρριψη', m: 'Πολιτική απορρήτου' }
     : { t: 'We use essential cookies and, with your consent, Google Analytics to improve this site.',
-        a: 'Accept', d: 'Decline', m: 'Learn more' };
+        a: 'Accept', d: 'Decline', m: 'Privacy policy' };
 
   /* ---- read stored choice ---- */
   function stored() { try { return localStorage.getItem(KEY); } catch (e) { return null; } }
