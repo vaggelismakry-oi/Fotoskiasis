@@ -59,6 +59,9 @@ meta tag in the HTML.
 - Edit the `.html` files directly. **Always update the English page and its Greek twin in `/el/` together.**
 - Optimise new photos to WebP, ~1600px max, quality ~82, then run the variant generator.
 - After editing `css/` or `js/`, re-stamp the cache-busting hashes or returning visitors keep the old file.
+- A lamp page gets `Product` structured data **only when it shows a price** (with an `Offer`). Google flags
+  any `Product` without a price, review or rating as invalid, so "Price on request" lamps carry none
+  (`node .tools/fix-product-schema.mjs` removes any that slip in).
 
 ## Maintenance scripts
 
