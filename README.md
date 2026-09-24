@@ -77,6 +77,7 @@ Run from the repository root. `npm install sharp` is needed only for `make-varia
 | `node .tools/fix-images.mjs` | Adds missing `width`/`height`, `loading`, `decoding`. |
 | `node .tools/stamp-assets.mjs` | Re-stamps `?v=` hashes on CSS/JS across every page. Run after editing `css/` or `js/`. |
 | `node .tools/build-dist.mjs` | Copies the website (without scripts, CI files and README) into a clean folder to deploy. |
+| `node .tools/update-sitemap-lastmod.mjs` | Sets each `sitemap.xml` `<lastmod>` to the page's last real change, from git (asset re-stamps and image `srcset` edits don't count). Run after committing, then commit the sitemap. |
 | `node .tools/check-structure.mjs` | Verifies landmark tags are balanced. |
 | `node .tools/check-langswitch.mjs` | Verifies the language switcher points at each page's own translation. |
 | `node .tools/fix-langswitch.mjs` | Repairs it when it does not. |
