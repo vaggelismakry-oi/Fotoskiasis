@@ -1,16 +1,13 @@
 # Cloudflare Pages — redirects (relative paths only).
 #
 # www -> apex is NOT handled here: Pages rejects absolute source URLs, so an
-# earlier `https://www.fotoskiasis.com/*` line was silently ignored. It belongs
-# in a zone-level Redirect Rule instead:
+# earlier `https://www.fotoskiasis.com/*` line was silently ignored. Since
+# 2026-09-25 it is a zone-level rule instead:
 #
-#   Cloudflare -> fotoskiasis.com -> Rules -> Redirect Rules -> Create
-#     If hostname equals   www.fotoskiasis.com
-#     Then dynamic URL     concat("https://fotoskiasis.com", http.request.uri.path)
-#     Status 301, preserve query string
-#
-# Until then both hostnames serve the site, and every page's canonical tag
-# points at the apex, so search engines consolidate on fotoskiasis.com.
+#   Cloudflare -> fotoskiasis.com -> Rules -> Redirect Rules
+#     "Redirect from WWW to root [Template]": https://www.* -> https://${1}, 301
+#     (path and query string carried over; needs the proxied DNS record
+#      CNAME www -> fotoskiasis-preview.pages.dev)
 
 # The restaurant is "Taj Mahal" (as its own sign reads); it was misspelled
 # "Tij Mahal" across the site until September 2026. These keep every old

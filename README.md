@@ -17,7 +17,7 @@ the files are hosted exactly as they are.
 - `js/main.js` — nav, gallery, scroll reveal, contact form
 - `js/analytics.js` — **the only place measurement IDs live** (see below)
 - `_headers`, `_redirects` — Cloudflare Pages security headers, caching and old-URL redirects
-  (www → fotoskiasis.com needs a Cloudflare Redirect Rule; see the note in `_redirects`)
+  (www → fotoskiasis.com is a Cloudflare Redirect Rule, not this file; see the note in `_redirects`)
 - `privacy.html`, `404.html`, `sitemap.xml`, `robots.txt`
 - `.tools/` — maintenance scripts (see below). Not deployed.
 
