@@ -14,16 +14,23 @@ import sharp from 'sharp';
 import { dimensions } from './image-dimensions.mjs';
 
 const WIDTHS = [480, 960];
+/* Product photos also appear as 74px gallery thumbnails, where even 480w is
+   several times too large (74px × a 3x phone screen = 222px). */
+const THUMB_WIDTH = 240;
+const widthsFor = (src) => (src.startsWith('images/products/') ? [THUMB_WIDTH, ...WIDTHS] : WIDTHS);
 const QUALITY = 78;
 const CHECK = process.argv.includes('--check');
 
 const isVariant = (name) => /-\d+w\.webp$/i.test(name);
 
+/* Link-preview cards are fetched whole by social platforms, never by pages. */
+const SKIP_DIRS = new Set(['images/og']);
+
 const sources = [];
 (function walk(dir) {
   for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
     const p = path.posix.join(dir, entry.name);
-    if (entry.isDirectory()) walk(p);
+    if (entry.isDirectory()) { if (!SKIP_DIRS.has(p)) walk(p); }
     else if (/\.(webp|jpe?g|png)$/i.test(entry.name) && !isVariant(entry.name)) sources.push(p);
   }
 })('images');
@@ -36,7 +43,7 @@ for (const src of sources) {
   if (!d) continue;
   const base = src.replace(/\.(webp|jpe?g|png)$/i, '');
 
-  for (const w of WIDTHS) {
+  for (const w of widthsFor(src)) {
     // never upscale, and don't bother when the gain is trivial
     if (d.width <= w * 1.15) { skipped++; continue; }
     const out = base + '-' + w + 'w.webp';
@@ -47,7 +54,8 @@ for (const src of sources) {
     }
     if (CHECK) { made++; continue; }
 
-    jobs.push(
+    // queued as functions: a promise starts work the moment it is created
+    jobs.push(() =>
       sharp(src)
         .resize({ width: w, withoutEnlargement: true })
         .webp({ quality: QUALITY })
@@ -60,7 +68,7 @@ for (const src of sources) {
 
 const CONCURRENCY = 8;
 for (let i = 0; i < jobs.length; i += CONCURRENCY) {
-  await Promise.all(jobs.slice(i, i + CONCURRENCY));
+  await Promise.all(jobs.slice(i, i + CONCURRENCY).map((job) => job()));
 }
 
 console.log(CHECK ? '--- check only ---' : '--- generated ---');

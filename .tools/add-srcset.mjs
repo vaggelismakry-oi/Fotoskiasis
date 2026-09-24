@@ -2,6 +2,10 @@
    LCP <link rel="preload"> in step so the browser preloads the SAME file it
    will actually render.
 
+   Existing srcset lists are refreshed too, so a newly generated variant width
+   reaches every page. Their sizes are left alone: some are set by hand or by
+   build-case-studies.mjs, which knows the layout better than SIZES below.
+
        node .tools/add-srcset.mjs           # apply
        node .tools/add-srcset.mjs --check   # report only                     */
 import fs from 'node:fs';
@@ -10,7 +14,7 @@ import { htmlPages } from './check-structure.mjs';
 import { dimensions } from './image-dimensions.mjs';
 
 const CHECK = process.argv.includes('--check');
-const WIDTHS = [480, 960];
+const WIDTHS = [240, 480, 960]; // 240w exists for product photos only (thumbnails)
 
 /* Images whose src is swapped at runtime by the product gallery or the project
    lightbox. srcset wins over src, so adding one here freezes the element on
@@ -21,7 +25,7 @@ const isJsControlled = (tag) => JS_CONTROLLED.some((marker) => tag.includes(mark
 /* How wide the image actually renders, by the container it sits in.
    Ordered most-specific first — the first match wins. */
 const SIZES = [
-  ['pdp-thumb', '120px'],
+  ['pdp-thumb', '74px'],
   ['pdp-stage', '(max-width: 900px) 92vw, 560px'],
   ['prod__img', '(max-width: 700px) 45vw, 320px'],
   ['hero__bg', '100vw'],
@@ -66,7 +70,16 @@ function srcsetFor(src) {
   return parts.join(', ');
 }
 
-let imgs = 0, preloads = 0;
+/** Swap in a fresh candidate list if the variants on disk have changed. */
+function refresh(tag, attr, src) {
+  const set = srcsetFor(src);
+  const re = new RegExp('(\\s' + attr + '=")([^"]*)(")');
+  if (!set || tag.match(re)[2] === set) return tag;
+  refreshed++;
+  return tag.replace(re, '$1' + set + '$3');
+}
+
+let imgs = 0, preloads = 0, refreshed = 0;
 
 for (const file of htmlPages('.')) {
   const before = fs.readFileSync(file, 'utf8');
@@ -74,9 +87,10 @@ for (const file of htmlPages('.')) {
 
   /* ---- <img> ---- */
   s = s.replace(/<img\b[^>]*>/g, (tag, offset) => {
-    if (tag.includes(' srcset=') || isJsControlled(tag)) return tag;
+    if (isJsControlled(tag)) return tag;
     const m = tag.match(/\ssrc="([^"]*)"/);
     if (!m) return tag;
+    if (tag.includes(' srcset=')) return refresh(tag, 'srcset', m[1]);
     const set = srcsetFor(m[1]);
     if (!set) return tag;
 
@@ -98,9 +112,10 @@ for (const file of htmlPages('.')) {
   );
 
   s = s.replace(/<link\b[^>]*rel="preload"[^>]*>/g, (tag) => {
-    if (!tag.includes('as="image"') || tag.includes('imagesrcset')) return tag;
+    if (!tag.includes('as="image"')) return tag;
     const m = tag.match(/\shref="([^"]*)"/);
     if (!m || jsControlledSrcs.has(m[1])) return tag;
+    if (tag.includes('imagesrcset')) return refresh(tag, 'imagesrcset', m[1]);
     const set = srcsetFor(m[1]);
     if (!set) return tag;
     preloads++;
@@ -113,3 +128,4 @@ for (const file of htmlPages('.')) {
 console.log(CHECK ? '--- check only ---' : '--- applied ---');
 console.log('<img> given srcset      :', imgs);
 console.log('preload links updated   :', preloads);
+console.log('srcset lists refreshed  :', refreshed);
