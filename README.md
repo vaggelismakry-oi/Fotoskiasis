@@ -16,18 +16,27 @@ the files are hosted exactly as they are.
 - `css/site.css` — the single stylesheet
 - `js/main.js` — nav, gallery, scroll reveal, contact form
 - `js/analytics.js` — **the only place measurement IDs live** (see below)
-- `_headers`, `_redirects` — Cloudflare Pages security headers, caching and the www redirect
+- `_headers`, `_redirects` — Cloudflare Pages security headers, caching and old-URL redirects
+  (www → fotoskiasis.com needs a Cloudflare Redirect Rule; see the note in `_redirects`)
 - `privacy.html`, `404.html`, `sitemap.xml`, `robots.txt`
-- `.tools/` — maintenance scripts (see below). Not served.
+- `.tools/` — maintenance scripts (see below). Not deployed.
 
 ## Deploy
-Hosted on **Cloudflare Pages**, connected to this repository.
-- Build command: *(empty)*
-- Output directory: `/` (repository root)
-- Production branch: `main`
+Hosted on **Cloudflare Pages**, project `fotoskiasis-preview` (direct upload), serving
+fotoskiasis.com. Only the website is uploaded: `.tools/build-dist.mjs` copies it into a clean
+folder, leaving out the scripts, `.github/`, dotfiles and this README.
 
-Every push to `main` redeploys. **If a change is not appearing on the live site, check that
-the Pages project is still connected to Git** — a direct-upload project does not rebuild on push.
+Every push to `main` deploys through `.github/workflows/deploy.yml`, after the audits pass —
+once the repository secret `CLOUDFLARE_API_TOKEN` (permission "Cloudflare Pages: Edit") exists.
+To deploy by hand from this PC:
+
+```
+node .tools/audit.mjs
+node .tools/build-dist.mjs
+npx --yes wrangler@4 pages deploy <folder it prints> --project-name=fotoskiasis-preview --branch=main --commit-dirty=true
+```
+
+Never deploy `.` (the repository root): that publishes the scripts and CI files too.
 
 ## Setting the measurement IDs
 Everything lives at the top of `js/analytics.js`:
@@ -64,6 +73,7 @@ Run from the repository root. `npm install sharp` is needed only for `make-varia
 | `node .tools/mark-language-links.mjs` | Adds `lang`/`hreflang` to the EN ↔ EL language-switch links on new pages. |
 | `node .tools/fix-images.mjs` | Adds missing `width`/`height`, `loading`, `decoding`. |
 | `node .tools/stamp-assets.mjs` | Re-stamps `?v=` hashes on CSS/JS across every page. Run after editing `css/` or `js/`. |
+| `node .tools/build-dist.mjs` | Copies the website (without scripts, CI files and README) into a clean folder to deploy. |
 | `node .tools/check-structure.mjs` | Verifies landmark tags are balanced. |
 | `node .tools/check-langswitch.mjs` | Verifies the language switcher points at each page's own translation. |
 | `node .tools/fix-langswitch.mjs` | Repairs it when it does not. |
