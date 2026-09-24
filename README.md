@@ -58,8 +58,10 @@ Run from the repository root. `npm install sharp` is needed only for `make-varia
 | Command | What it does |
 | --- | --- |
 | `node .tools/audit.mjs` | Full pre-deploy check: placeholders, canonicals, hreflang, h1s, alt text, image dimensions, broken links. **Run this before every push.** |
-| `node .tools/make-variants.mjs` | Generates `-480w` / `-960w` WebP variants for new photos. Idempotent. |
-| `node .tools/add-srcset.mjs` | Adds `srcset`/`sizes` to new `<img>` tags. Skips gallery images whose `src` JavaScript swaps. |
+| `node .tools/make-variants.mjs` | Generates `-480w` / `-960w` WebP variants for new photos, plus `-240w` for product photos (gallery thumbnails). Idempotent. |
+| `node .tools/add-srcset.mjs` | Adds `srcset`/`sizes` to new `<img>` tags and refreshes existing `srcset` lists when variants change. Skips gallery images whose `src` JavaScript swaps. |
+| `node .tools/fix-card-sizes.mjs` | Gives product-card photos in `.prod-grid` their measured `sizes` (add-srcset can't see the grid). |
+| `node .tools/mark-language-links.mjs` | Adds `lang`/`hreflang` to the EN ↔ EL language-switch links on new pages. |
 | `node .tools/fix-images.mjs` | Adds missing `width`/`height`, `loading`, `decoding`. |
 | `node .tools/stamp-assets.mjs` | Re-stamps `?v=` hashes on CSS/JS across every page. Run after editing `css/` or `js/`. |
 | `node .tools/check-structure.mjs` | Verifies landmark tags are balanced. |
@@ -72,6 +74,8 @@ After adding a page or photo, the usual sequence is:
 node .tools/make-variants.mjs
 node .tools/fix-images.mjs
 node .tools/add-srcset.mjs
+node .tools/fix-card-sizes.mjs
+node .tools/mark-language-links.mjs
 node .tools/stamp-assets.mjs
 node .tools/audit.mjs
 ```
